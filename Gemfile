@@ -16,9 +16,13 @@ gem 'jbuilder', '~> 2.5'
 gem 'rails_admin'
 gem 'bootstrap', '~> 5.2.0'
 gem 'jquery-rails'
-gem 'popper_js', '~> 2.11.5'
+gem 'popper_js'
 gem 'mini_racer'
 gem 'carrierwave'
+gem 'simple_form'
+gem 'toastr_rails'
+gem 'devise'
+
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'capybara', '~> 2.13'

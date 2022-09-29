@@ -1,26 +1,21 @@
-<header class="bg-dark py-5">
-  <div class="container px-4 px-lg-5 my-5">
-    <div class="text-center text-white">
-      <h1 class="display-4 fw-bolder">Fashion Jewellery </h1>
-      <p class="lead fw-normal text-white-50 mb-0">
-        Fashion Jewellery App Hompeage
-      </p>
-    </div>
-  </div>
-</header>
+<%= render 'shared/home_banner' %>
+<%= render 'shared/home_cards' %>
+<%= render 'shared/product_category' %>
 
-<section class="py-5">
-  <div class="container px-4 px-lg-5 mt-5">
+<section class="py-5 home-margin">
+  <div class="container mt-5">
     <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-      <% Product.all.each do |product| %>
+      <% Product.order('RANDOM()').first(4).each do |product| %>
         <div class="col mb-5">
           <div class="card h-100">
-            <% if product.discount.to_i > 0 %>
+            <% if product.discountable? %>
               <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Discount
               </div>
             <% end %>
             <% if product.image.present? %>
-              <%= image_tag(product.image.url, class: "card-img-top product-image")%>
+              <%= link_to product_path(product) do %>
+                <%= image_tag(product.image.url, class: "card-img-top product-image")%>
+              <% end %>
             <% else %>
               <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
             <% end %>
@@ -37,7 +32,8 @@
             </div>
             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
               <div class="text-center">
-                <a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a>
+                <%= render 'shared/add_to_cart', product: product %>
+
               </div>
             </div>
           </div>
@@ -47,3 +43,21 @@
   </div>
 </section>
 
+<script type="text/javascript">
+  let items = document.querySelectorAll('.carousel .carousel-item')
+
+  items.forEach((el) => {
+      const minPerSlide = 4
+      let next = el.nextElementSibling
+      for (var i=1; i<minPerSlide; i++) {
+          if (!next) {
+              // wrap carousel by using first child
+            next = items[0]
+          }
+          let cloneChild = next.cloneNode(true)
+          el.appendChild(cloneChild.children[0])
+          next = next.nextElementSibling
+      }
+  })
+
+</script>

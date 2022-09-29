@@ -1,0 +1,17 @@
+<div class="py-5 login-top-mrgn">
+  <div class="container px-4 px-lg-5 mt-5">
+    <h2>Forgot your password?</h2>
+    <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+      <%= f.error_notification %>
+
+      <div class="form-inputs">
+        <%= f.input :email, required: false %>
+      </div>
+      <br>
+      <div class="form-actions">
+        <%= f.button :submit, "Send me reset password instructions", class: "btn btn-outline-dark btn-sm form-button" %>
+      </div>
+    <% end %>
+  </div>
+</div>
+

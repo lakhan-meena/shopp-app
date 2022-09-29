@@ -1,0 +1,55 @@
+<div class="container px-4 px-lg-5 mt-5">
+  <div class="table-responsive shopping-cart">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Product Name</th>
+          <th class="text-center">Quantity</th>
+          <th class="text-center">Unit Price</th>
+          <th class="text-center">Subtotal</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @cart.items.each do |item| %>
+          <tr>
+            <td>
+              <div class="product-item">
+                <%= link_to product_path(item.product), class: "product-thumb" do %>
+                  <%= image_tag(item.product.image.url, class: "cart-img")%>
+                <% end %>
+                <div class="product-info">
+                  <h4 class="product-title">
+                    <%= link_to "#{item.product.title}", product_path(item.product) %>
+                  </h4>
+                    <span><em>Size:</em> 10.5</span><span><em>Inventory:</em> In Stock</span>
+                </div>
+              </div>
+            </td>
+            <td class="text-center">
+              <%= item.quantity %>
+            </td>
+            <td class="text-center">
+              <%= item.product.price %>
+            </td>
+            <td class="text-center">
+              <%= item.subtotal %>
+            </td>
+            <td>
+              <%= link_to "Remove", item_path(item), method: :delete, class: "btn btn-outline-danger" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="shopping-cart-footer">
+        <div class="column text-lg">Subtotal: <span class="text-medium">$289.68</span></div>
+    </div>
+    <div class="shopping-cart-footer">
+        <div class="column">
+          <%= link_to "Back to Shopping", root_path, class: "btn btn-primary" %>
+        </div>
+        <div class="column"><a class="btn btn-primary" href="#" data-toast="" data-toast-type="success" data-toast-position="topRight" data-toast-icon="icon-circle-check" data-toast-title="Your cart" data-toast-message="is updated successfully!">Update Cart</a><a class="btn btn-success" href="#">Checkout</a></div>
+    </div>
+</div>
